@@ -51,7 +51,8 @@ def display_memory_info(meminfo):
     available_mem = meminfo.get('MemAvailable', free_mem)
     buffers = meminfo.get('Buffers', 0)
     cached = meminfo.get('Cached', 0)
-    used_mem = total_mem - free_mem - buffers - cached
+    # Calculate used memory as total - available (more accurate)
+    used_mem = total_mem - available_mem
     
     swap_total = meminfo.get('SwapTotal', 0)
     swap_free = meminfo.get('SwapFree', 0)

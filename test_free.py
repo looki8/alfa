@@ -6,6 +6,8 @@ Tests for the free.py memory information utility.
 import unittest
 import sys
 import os
+import io
+from contextlib import redirect_stdout
 
 # Add the current directory to the path to import free
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -45,9 +47,6 @@ class TestFreeUtility(unittest.TestCase):
         meminfo = free.get_memory_info()
         try:
             # Redirect stdout to suppress output during test
-            import io
-            from contextlib import redirect_stdout
-            
             f = io.StringIO()
             with redirect_stdout(f):
                 free.display_memory_info(meminfo)
@@ -64,9 +63,6 @@ class TestFreeUtility(unittest.TestCase):
     
     def test_main_returns_zero(self):
         """Test that main function returns 0 (success)."""
-        import io
-        from contextlib import redirect_stdout
-        
         f = io.StringIO()
         with redirect_stdout(f):
             result = free.main()
